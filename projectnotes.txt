@@ -1,0 +1,22 @@
+MVP v1:
+- TODO: Authentication [DONE]
+- API endpoint: Return list of events of logged in user [DONE]
+- API endpoint: Create event and associate it with the logged in user [DONE]
+	- Event creation takes in:
+		- name of event
+		- place
+		- time the event takes place
+	
+- API endpoint: Detail page of event [DONE]
+	- Returns:
+		- name of event
+		- people involved (and how they're involved, what their position is in the event)
+		- place
+		- time the event takes place
+
+
+Last thing I did:
+- Installed python-pip in the server.
+
+Next:
+- Continue on how to deploy a django application to a DigitalOcean droplet
