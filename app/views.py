@@ -117,7 +117,7 @@ def register(request):
 	serializer = UserSerializer(data=request.data)
 	if serializer.is_valid():
 		user_instance = serializer.save()
-		user_instance.set_password(request.POST.get("password"))
+		user_instance.set_password(request.data.get("password"))
 		user_instance.save()
 		# user_instance.profile.save()
 
