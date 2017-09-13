@@ -8,6 +8,10 @@ from rest_framework.authtoken.models import Token
 #============================= APP IMPORTS ==============================#
 from app.models import Event, Suggestion
 
+class UserSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = User
+		fields = ('username', 'password')
 
 class EventSerializer(serializers.ModelSerializer):
 	attendees = UserSerializer(many=True)
@@ -22,8 +26,4 @@ class SuggestionSerializer(serializers.ModelSerializer):
 		model = Suggestion
 		fields = '__all__'
 
-class UserSerializer(serializers.ModelSerializer):
-	class Meta:
-		model = User
-		fields = ('username', 'password')
 
