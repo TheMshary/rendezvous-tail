@@ -11,7 +11,7 @@ from app.models import Event, Suggestion
 class UserSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = User
-		fields = ('username', 'password')
+		fields = ('username',)
 
 class EventSerializer(serializers.ModelSerializer):
 	attendees = UserSerializer(many=True)
