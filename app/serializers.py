@@ -10,6 +10,8 @@ from app.models import Event, Suggestion
 
 
 class EventSerializer(serializers.ModelSerializer):
+	attendees = UserSerializer(many=True)
+
 	class Meta:
 		model = Event
 		fields = '__all__'
