@@ -14,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
 		fields = ('username',)
 
 class EventSerializer(serializers.ModelSerializer):
-	attendees = UserSerializer(many=True)
+	attendees = UserSerializer(read_only=True, many=True)
 
 	class Meta:
 		model = Event
