@@ -23,11 +23,11 @@ from app import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
-    url(r'^event/', views.EventView.as_view()),
-    url(r'^event/invite/', views.EventInviteView.as_view()),
-    url(r'^event/uninvite/', views.EventUninviteView.as_view()),
+    url(r'^event/$', views.EventView.as_view()),
+    url(r'^event/invite/$', views.EventInviteView.as_view()),
+    url(r'^event/uninvite/$', views.EventUninviteView.as_view()),
     # url(r'^event/accept/', views.AcceptInviteView.as_view()),
-    url(r'^event/suggest/', views.SuggestionView.as_view()),
+    url(r'^event/suggest/$', views.SuggestionView.as_view()),
     # url(r'^event/suggest/vote', views.VotingView.as_view()),
 
     url(r'^register/', views.register),
