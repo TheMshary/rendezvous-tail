@@ -40,7 +40,7 @@ class EventView(APIView):
 			events_created = user.events_created
 			events_attending = user.events_attending
 			
-			events = Event.objects.filter(Q(creator=user) | Q(attendees=user))
+			events = Event.objects.filter(Q(creator=user) | Q(attendees=user)).distinct()
 			serializer = EventSerializer(events, many=True)
 
 		else:
