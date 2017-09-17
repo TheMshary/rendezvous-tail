@@ -62,15 +62,60 @@ class EventView(APIView):
 
 class EventInviteView(APIView):
 
+	authentication_classes = (TokenAuthentication,)
+	permission_classes = (IsAuthenticated,)
+
+	# this post() doesn't do bulk invites
 	def post(self, request):
 		pk = request.data.get('pk')
-		usernames = request.data.get('invitees')
-		event = Event.objects.get(pk=pk)
-		for username in usernames:
-			invitee = User.objects.get(username=username)
-			event.attendees.add(invitee)
+		username = request.data.get('invitee')
+		event = get_object_or_404(Event, pk=pk)#.objects.get(pk=pk)
+		invitee = get_object_or_404(User, username=username)#User.objects.get(username=username)
+		event.attendees.add(invitee)
 
 		return Response(status=status.HTTP_201_CREATED)
+
+
+	# this post() does bulk invites
+	# def post(self, request):
+	# 	pk = request.data.get('pk')
+	# 	usernames = request.data.get('invitees')
+	# 	event = Event.objects.get(pk=pk)
+	# 	for username in usernames:
+	# 		invitee = User.objects.get(username=username)
+	# 		event.attendees.add(invitee)
+
+	# 	return Response(status=status.HTTP_201_CREATED)
+
+
+class EventUninviteView(APIView):
+
+	authentication_classes = (TokenAuthentication,)
+	permission_classes = (IsAuthenticated,)
+
+	def post(self, request):
+		pk = request.data.get('pk')
+		username = request.data.get('invitee')
+		event = get_object_or_404(Event, pk=pk)#.objects.get(pk=pk)
+		invitee = get_object_or_404(User, username=username)#User.objects.get(username=username)
+		event.attendees.remove(invitee)
+
+		return Response(status=status.HTTP_200_OK)
+
+
+# class AcceptInviteView(APIView):
+
+# 	authentication_classes = (TokenAuthentication,)
+# 	permission_classes = (IsAuthenticated,)
+
+# 	def post(self, request):
+# 		pk = request.data.get('pk')
+# 		username = request.data.get('invitee')
+# 		event = get_object_or_404(Event, pk=pk)#.objects.get(pk=pk)
+# 		invitee = get_object_or_404(User, username=username)#User.objects.get(username=username)
+# 		event.attendees.remove(invitee)
+
+# 		return Response(status=status.HTTP_200_OK)
 
 
 class SuggestionView(APIView):

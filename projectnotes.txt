@@ -16,11 +16,7 @@ MVP v1:
 
 
 Last thing I did:
-- I was updating the code in the server, tried "git pull" but asked me to stash the changes made to the files.
-- But the db.sqlite3 was also changed and had to be stashed. So I did that. And now the db file that was there in the server
-- is no longer there (it's in the stashed commit), and instead the db in the server is the one that was in my local machine.
-- Next there was a problem with the permissions on the db file in the server, so I chown'd it to www-data. Fixed the issue.
-- Now, there pops this issue that is described below. Good luck!
+- Fixed yesterday's server/database issue by reverting to previous commit
 
 Next:
-- Posting event in Postman creates an error. You can see it in the error.log in the server.
+- Start with the inviting system. Start with the view that does single invite request.
