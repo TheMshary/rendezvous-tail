@@ -37,8 +37,8 @@ class EventView(APIView):
 		eventpk = request.GET.get('pk')
 		user = request.user
 		if eventpk is None:
-			events_created = user.events_created
-			events_attending = user.events_attending
+			events_created = user.events_created.order_by("time")
+			events_attending = user.events_attending.order_by("time")
 			
 			# events = Event.objects.filter(Q(creator=user) | Q(attendees=user)).distinct()
 			# serializer = EventSerializer(events, many=True)
