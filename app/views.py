@@ -40,14 +40,21 @@ class EventView(APIView):
 			events_created = user.events_created
 			events_attending = user.events_attending
 			
-			events = Event.objects.filter(Q(creator=user) | Q(attendees=user)).distinct()
-			serializer = EventSerializer(events, many=True)
+			# events = Event.objects.filter(Q(creator=user) | Q(attendees=user)).distinct()
+			# serializer = EventSerializer(events, many=True)
+			serializer_created = EventSerializer(events_created, many=True)
+			serializer_attending = EventSerializer(events_attending, many=True)
+			data = {
+				"created": serializer_created.data,
+				"attending": serializer_attending.data
+			}
 
 		else:
 			event = get_object_or_404(Event, pk=eventpk)
 			serializer = EventSerializer(event)
+			data = serializer.data
 
-		return Response(serializer.data, status=status.HTTP_200_OK)
+		return Response(data, status=status.HTTP_200_OK)
 
 	def post(self, request):
 		serializer = EventSerializer(data=request.data)
