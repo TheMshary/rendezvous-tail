@@ -130,7 +130,7 @@ class SuggestionView(APIView):
 	# you get suggestions when GET-ing the Event, so this get function might not be needed
 	def get(self, request):
 		eventpk = request.data.get('pk')
-		suggestions = Suggestion.objects.filter(event__pk=eventpk)
+		suggestions = Event.objects.get(pk=pk).suggestion_set.all()
 		serializer = SuggestionSerializer(suggestions, many=True)
 
 		return Response(serializer.data, status=status.HTTP_200_OK)
