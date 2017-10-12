@@ -32,6 +32,9 @@ class Suggestion(models.Model):
 	time = models.CharField(max_length=404)
 	activity = models.CharField(max_length=330)
 
+	def __str__(self):
+		return "%s @ %s @ %s" % (self.activity, self.time, self.location)
+
 
 #=============================== SIGNALS ================================#
 
