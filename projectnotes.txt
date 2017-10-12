@@ -1,3 +1,6 @@
+TODO:
+- Use AsyncStorage or some other form of permanent storage on device to store the login token such that the user doesn't have to login everytime. Next: Logout.
+
 Last thing I did:
 - 
 
