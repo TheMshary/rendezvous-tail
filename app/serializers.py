@@ -6,7 +6,7 @@ from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
 #============================= APP IMPORTS ==============================#
-from app.models import Event, Suggestion
+from app.models import Event, Suggestion, Invite
 
 class UserSerializer(serializers.ModelSerializer):
 	class Meta:
@@ -27,3 +27,14 @@ class SuggestionSerializer(serializers.ModelSerializer):
 		fields = '__all__'
 
 
+class InviteSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Invite
+		fields = '__all__'
+
+	def to_representation(self, instance):
+		data = super(InviteSerializer, self).to_representation(instance)
+		data.update({
+			"username": instance.user.username
+			})
+		return data
