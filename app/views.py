@@ -1,5 +1,6 @@
 #============================= CORE IMPORTS =============================#
 import json
+import requests
 from itertools import chain
 
 #============================ Django IMPORTS ==============================#
@@ -39,7 +40,7 @@ class EventView(APIView):
 		if event_id is None:
 			events_created = user.events_created.order_by("time")
 			events_attending = user.invite_set.filter(status="accepted").order_by("event__time")
-			
+
 			# events = Event.objects.filter(Q(creator=user) | Q(attendees=user)).distinct()
 			# serializer = EventSerializer(events, many=True)
 			serializer_created = EventSerializer(events_created, many=True)
@@ -218,4 +219,17 @@ def register(request):
 		return Response(serializer.data, status=status.HTTP_201_CREATED)
 	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class AliasGetToken(APIView):
 
+	@csrf_exempt
+	def post(self, request):
+		alias = request.data.get("alias")
+		user, created = User.objects.get_or_create(username=alias)
+		user.set_unusable_password()
+		user.save()
+
+		# by this point, made a new user
+		# return token to client
+
+		serializer = TokenSerializer(user.auth_token)
+		return Response(serializer.data, status=status.HTTP_201_CREATED)

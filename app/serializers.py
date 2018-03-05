@@ -13,6 +13,11 @@ class UserSerializer(serializers.ModelSerializer):
 		model = User
 		fields = ('username',)
 
+class TokenSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Token
+		fields = '__all__'
+
 class EventSerializer(serializers.ModelSerializer):
 	attendees = UserSerializer(read_only=True, many=True)
 

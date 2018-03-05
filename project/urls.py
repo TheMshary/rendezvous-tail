@@ -18,7 +18,7 @@ from django.contrib import admin
 
 from rest_framework.authtoken import views as framework_views
 
-from app import views 
+from app import views
 
 """
 Create event:				POST		/events
@@ -60,5 +60,6 @@ urlpatterns = [
 	url(r'^register/', views.register),
 
 	# Authenticating login (returns JsonResponse with token when username/password POST'd correctly)
+	url(r'^login/alias/', views.AliasGetToken.as_view()),
 	url(r'^login/', framework_views.obtain_auth_token),
 ]
