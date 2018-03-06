@@ -1,8 +1,11 @@
-TODO:
-- Use AsyncStorage or some other form of permanent storage on device to store the login token such that the user doesn't have to login everytime. Next: Logout.
+Icebox:
+- GET /events returns three lists: attending, invites, and created. The events in created are not also in attending. Should they be? Should the created events also be in the attending list? I don't think so now that I think about it.
+- Make sure the HTTP response codes match the RESTful standards
+
+
 
 Last thing I did:
-- 
+- Redesigned the URI scheme for the API in "urls.py".
 
 Next:
-- 
+- Update the views such that they reflect the changes to the API structure.
